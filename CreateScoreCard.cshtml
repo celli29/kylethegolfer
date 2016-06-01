@@ -1,0 +1,287 @@
+﻿@using System.Activities.Statements
+@model GolfWorld1.Models.Course
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<script src="~/scripts/jquery-2.2.3.js"></script>
+<script type="text/javascript">
+
+    function sum(row) {
+        var outTotal = 0;
+        var inTotal = 0;
+        var idName;
+
+        for (var i = 1; i <= 9; i++) {
+            idName = row + "c" + i;
+            outTotal += (parseInt($('#' + idName).val()) || 0);
+        }
+        for (var i = 10; i <= 18; i++) {
+            idName = row + "c" + i;
+            inTotal += (parseInt($('#' + idName).val()) || 0);
+        }
+
+        document.getElementById(row + "Out").value = outTotal;
+        document.getElementById(row + "In").value = inTotal;
+        document.getElementById(row + "Total").value = (parseInt($('#' + row + "Out").val()) || 0 ) + (parseInt($('#' + row + 'In').val()) || 0 ); // single or double both work
+    }
+</script>
+
+
+
+<h3>Create New ScoreCard - 2nd step, enter tee info with pars, handicaps, and distances</h3>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        <br/>
+        @*Golf Course : @Html.LabelFor(model=>model.Name)<br/>*@
+        Golf Course Name : @Html.Label(Model.Name)<br/>
+        <br/>
+        
+        @if (ViewBag.ExistingRows > 4)
+        {
+            <table class="MyTable">
+                @* Header *@
+                <tr class="rtheme">
+                    <th class="holeWidthJumbo">
+                        @Html.Label("Theme")
+                    </th>
+                    <th class="holeWidthJumbo">
+                        @Html.Label("Name")
+                    </th>
+                    <th class="holeWidthJumbo">
+                        @Html.Label("Tee Color")
+                    </th>
+                    <th class="holeWidthNormal">
+                        @Html.Label("H1")
+                    </th>
+                    <th class="holeWidthNormal">
+                        @Html.Label("H2")
+                    </th>
+                    <th class="holeWidthNormal">
+                        @Html.Label("H3")
+                    </th>
+                    <th class="holeWidthNormal">
+                        @Html.Label("H4")
+                    </th>
+                    <th class="holeWidthNormal">
+                        @Html.Label("H5")
+                    </th>
+                    <th class="holeWidthNormal">
+                        @Html.Label("H6")
+                    </th>
+                    <th class="holeWidthNormal">
+                        @Html.Label("H7")
+                    </th>
+                    <th class="holeWidthNormal">
+                        @Html.Label("H8")
+                    </th>
+                    <th class="holeWidthNormal">
+                        @Html.Label("H9")
+                    </th>
+                    <th class="holeWidthLarge">
+                        @Html.Label("Out")
+                    </th>
+
+                    <th class="holeWidthNormal">
+                        @Html.Label("H10")
+                    </th>
+                    <th class="holeWidthNormal">
+                        @Html.Label("H11")
+                    </th>
+                    <th class="holeWidthNormal">
+                        @Html.Label("H12")
+                    </th>
+                    <th class="holeWidthNormal">
+                        @Html.Label("H13")
+                    </th>
+                    <th class="holeWidthNormal">
+                        @Html.Label("H14")
+                    </th>
+                    <th class="holeWidthNormal">
+                        @Html.Label("H15")
+                    </th>
+                    <th class="holeWidthNormal">
+                        @Html.Label("H16")
+                    </th>
+                    <th class="holeWidthNormal">
+                        @Html.Label("H17")
+                    </th>
+                    <th class="holeWidthNormal">
+                        @Html.Label("H18")
+                    </th>
+
+                    <th class="holeWidthLarge">
+                        @Html.Label("In")
+                    </th>
+                    <th class="holeWidthLarge">
+                        @Html.Label("Total")
+                    </th>
+
+                    <th class="holeWidthNormal">
+                        @Html.Label("Rating")
+                    </th>
+                    <th class="holeWidthNormal">
+                        @Html.Label("Slope")
+                    </th>
+                    <th class="holeWidthNormal">
+                        @Html.Label("Copy")
+                    </th>
+                    <th class="holeWidthNormal">
+                        @Html.Label("Gender")
+                    </th>
+                </tr>
+
+                @for (int i = 0; i < ViewBag.ExistingRows; i++)
+                {
+                    <tr class="rInput@(Model.TCInfos[i].Theme)">
+                        <td class="holeWidthJumbo">
+                            @Html.TextBoxFor(model => model.TCInfos[i].Theme, new { @class = "noBorderTextBox", @disabled = "disabled" })
+                        </td>
+                        <td class="holeWidthJumbo">
+                            @Html.TextBoxFor(model => model.TCInfos[i].Name, new { @class = "noBorderTextBox" })
+                        </td>
+                        <td class="holeWidthJumbo">
+                            @Html.TextBoxFor(model => model.TCInfos[i].TColor, new { @class = "noBorderTextBox" })
+                        </td>
+                        <td class="holeWidthLarge">
+                            @Html.TextBoxFor(model => model.TCInfos[i].H01, new { @class = "noBorderTextBox", id = i + "c1", onchange = "sum(" + i + ")" })
+                        </td>
+                        <td class="holeWidthLarge">
+                            @Html.TextBoxFor(model => model.TCInfos[i].H02, new { @class = "noBorderTextBox", id = i + "c2", onchange = "sum(" + i + ")" })
+                        </td>
+                        <td class="holeWidthLarge">
+                            @Html.TextBoxFor(model => model.TCInfos[i].H03, new { @class = "noBorderTextBox", id = i + "c3", onchange = "sum(" + i + ")" })
+                        </td>
+                        <td class="holeWidthLarge">
+                            @Html.TextBoxFor(model => model.TCInfos[i].H04, new { @class = "noBorderTextBox", id = i + "c4", onchange = "sum(" + i + ")" })
+                        </td>
+                        <td class="holeWidthLarge">
+                            @Html.TextBoxFor(model => model.TCInfos[i].H05, new { @class = "noBorderTextBox", id = i + "c5", onchange = "sum(" + i + ")" })
+                        </td>
+                        <td class="holeWidthLarge">
+                            @Html.TextBoxFor(model => model.TCInfos[i].H06, new { @class = "noBorderTextBox", id = i + "c6", onchange = "sum(" + i + ")" })
+                        </td>
+                        <td class="holeWidthLarge">
+                            @Html.TextBoxFor(model => model.TCInfos[i].H07, new { @class = "noBorderTextBox", id = i + "c7", onchange = "sum(" + i + ")" })
+                        </td>
+                        <td class="holeWidthLarge">
+                            @Html.TextBoxFor(model => model.TCInfos[i].H08, new { @class = "noBorderTextBox", id = i + "c8", onchange = "sum(" + i + ")" })
+                        </td>
+                        <td class="holeWidthLarge">
+                            @Html.TextBoxFor(model => model.TCInfos[i].H09, new { @class = "noBorderTextBox", id = i + "c9", onchange = "sum(" + i + ")" })
+                        </td>
+                        <td class="holeWidthLarge">
+                            @Html.TextBoxFor(model => model.TCInfos[i].HOut, new { @class = "noBorderTextBox", @disabled = "disabled", id = i + "Out" })
+                        </td>
+
+                        <td class="holeWidthLarge">
+                            @Html.TextBoxFor(model => model.TCInfos[i].H10, new { @class = "noBorderTextBox", id = i + "c10", onchange = "sum(" + i + ")" })
+                        </td>
+                        <td class="holeWidthLarge">
+                            @Html.TextBoxFor(model => model.TCInfos[i].H11, new { @class = "noBorderTextBox", id = i + "c11", onchange = "sum(" + i + ")" })
+                        </td>
+                        <td class="holeWidthLarge">
+                            @Html.TextBoxFor(model => model.TCInfos[i].H12, new { @class = "noBorderTextBox", id = i + "c12", onchange = "sum(" + i + ")" })
+                        </td>
+                        <td class="holeWidthLarge">
+                            @Html.TextBoxFor(model => model.TCInfos[i].H13, new { @class = "noBorderTextBox", id = i + "c13", onchange = "sum(" + i + ")" })
+                        </td>
+                        <td class="holeWidthLarge">
+                            @Html.TextBoxFor(model => model.TCInfos[i].H14, new { @class = "noBorderTextBox", id = i + "c14", onchange = "sum(" + i + ")" })
+                        </td>
+                        <td class="holeWidthLarge">
+                            @Html.TextBoxFor(model => model.TCInfos[i].H15, new { @class = "noBorderTextBox", id = i + "c15", onchange = "sum(" + i + ")" })
+                        </td>
+                        <td class="holeWidthLarge">
+                            @Html.TextBoxFor(model => model.TCInfos[i].H16, new { @class = "noBorderTextBox", id = i + "c16", onchange = "sum(" + i + ")" })
+                        </td>
+                        <td class="holeWidthLarge">
+                            @Html.TextBoxFor(model => model.TCInfos[i].H17, new { @class = "noBorderTextBox", id = i + "c17", onchange = "sum(" + i + ")" })
+                        </td>
+                        <td class="holeWidthLarge">
+                            @Html.TextBoxFor(model => model.TCInfos[i].H18, new { @class = "noBorderTextBox", id = i + "c18", onchange = "sum(" + i + ")" })
+                        </td>
+                        <td class="holeWidthLarge">
+                            @Html.TextBoxFor(model => model.TCInfos[i].HIn, new { @class = "noBorderTextBox", @disabled = "disabled", id = i + "In" })
+                        </td>
+                        <td class="holeWidthLarge">
+                            @Html.TextBoxFor(model => model.TCInfos[i].HTotal, new { @class = "noBorderTextBox", @disabled = "disabled", id = i + "Total" })
+                        </td>
+                        <td class="holeWidthNormal">
+                            @Html.TextBoxFor(model => model.TCInfos[i].Rating, new { @class = "noBorderTextBox" })
+                        </td>
+                        <td class="holeWidthNormal">
+                            @Html.TextBoxFor(model => model.TCInfos[i].Slope, new { @class = "noBorderTextBox" })
+                        </td>
+                        <td class="holeWidthNormal">
+                            @Html.Label("copy")
+                        </td>
+                        <td class="holeWidthNormal">
+                            @Html.TextBoxFor(model => model.TCInfos[i].Gender, new { @class = "noBorderTextBox", @disabled = "disabled" })
+                        </td>
+                    </tr>
+
+                }
+
+            </table>
+        }
+        <br/>
+
+        @Html.TextBox("aa", null, new { @class = "holeWidthNormal" })
+
+        @* Hidden *@
+        <div class="form-group">
+            @Html.EditorFor(model => model.GCID, new { htmlAttributes = new { @class = "hidden" } })
+            @Html.EditorFor(model => model.CreateDate, new { htmlAttributes = new { @class = "hidden" } })
+            @Html.EditorFor(model => model.UpdateDate, new { htmlAttributes = new { @class = "hidden" } })
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "hidden" } })
+            @Html.EditorFor(model => model.SubCourseName, new { htmlAttributes = new { @class = "hidden" } })
+            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "hidden" } })
+            @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "hidden" } })
+            @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "hidden" } })
+            @Html.EditorFor(model => model.Zip, new { htmlAttributes = new { @class = "hidden" } })
+            @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "hidden" } })
+            @Html.EditorFor(model => model.NHole, new { htmlAttributes = new { @class = "hidden" } })
+            @Html.EditorFor(model => model.Pars, new { htmlAttributes = new { @class = "hidden" } })
+            @Html.EditorFor(model => model.Tee1, new { htmlAttributes = new { @class = "hidden" } })
+            @Html.EditorFor(model => model.Tee2, new { htmlAttributes = new { @class = "hidden" } })
+            @Html.EditorFor(model => model.Tee3, new { htmlAttributes = new { @class = "hidden" } })
+            @Html.EditorFor(model => model.Tee4, new { htmlAttributes = new { @class = "hidden" } })
+            @Html.EditorFor(model => model.Tee5, new { htmlAttributes = new { @class = "hidden" } })
+            @Html.EditorFor(model => model.Tee6, new { htmlAttributes = new { @class = "hidden" } })
+            @Html.EditorFor(model => model.Tee7, new { htmlAttributes = new { @class = "hidden" } })
+            @Html.EditorFor(model => model.Tee8, new { htmlAttributes = new { @class = "hidden" } })
+            @Html.EditorFor(model => model.Tee9, new { htmlAttributes = new { @class = "hidden" } })
+            @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "hidden" } })
+            @Html.EditorFor(model => model.URL, new { htmlAttributes = new { @class = "hidden" } })
+            @for (int i = 0; i < ViewBag.ExistingRows; i++)
+            {
+                @Html.EditorFor(model => model.TCInfos[i].TCID, new {htmlAttributes = new {@class = "hidden"}})
+            }
+        </div>
+        
+        @* End of Hidden *@
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <br />
+                <input type="submit" value="Create" class="btn btn-default" style="background-color:#4EE2EC"/>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

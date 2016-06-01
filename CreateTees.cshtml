@@ -1,0 +1,55 @@
+﻿@model GolfWorld1.Models.Course
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create New ScoreCard - 1st step, enter tee info for men and women</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Create Score Card - Tee Info</h4>
+        <hr />
+        
+        <h5>Enter the number of tees for men and women<br/></h5>
+        <table class="table">
+            @* Header for getting Men/Women tees *@
+            <tr>
+                <th>
+                    @Html.Label("Men", new { @class = "control-label col-md-2" })
+                </th>
+                <th>
+                    @Html.Label("Women", new { @class = "control-label col-md-2" })
+                </th>
+            </tr>
+
+            <tr>
+                <td>
+                    @Html.TextBox("numMenTee")
+                </td>
+                <td>
+                    @Html.TextBox("numWomenTee")
+                </td>
+            </tr>
+        </table>
+        
+    <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create Score Card" class="btn btn-default" />
+                @*@Html.ActionLink("New ScoreCard", "CreateScoreCard", new { model => model. Course.GCID })*@
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

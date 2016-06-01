@@ -1,0 +1,219 @@
+﻿@model GolfWorld1.Models.Course
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<script src="~/scripts/jquery-2.2.3.js"></script>
+<script type="text/javascript">
+    $(window).bind("load", function () {
+        //debugger;
+        //$('.ParHSlope').remove();
+        //$('.HandicapHSlope').remove();
+    });
+</script>
+
+<h2>View Score Card</h2>
+
+<div>
+    <hr />
+    <p><h3>Golf Course : @Model.Name</h3></p><br/>
+
+    <table class="MyTable">
+        @* Header *@
+        <tr class="rtheme">
+            <th class="holeWidthLargest">
+                Theme
+            </th>
+            <th class="holeWidthLarge">
+                Name
+            </th>
+            <th class="holeWidthLarge">
+                Tee Color
+            </th>
+            <th class="holeWidthNormal">
+                1
+            </th>
+            <th class="holeWidthNormal">
+                2
+            </th>
+            <th class="holeWidthNormal">
+                3
+            </th>
+            <th class="holeWidthNormal">
+                4
+            </th>
+            <th class="holeWidthNormal">
+                5
+            </th>
+            <th class="holeWidthNormal">
+                6
+            </th>
+            <th class="holeWidthNormal">
+                7
+            </th>
+            <th class="holeWidthNormal">
+                8
+            </th>
+            <th class="holeWidthNormal">
+                9
+            </th>
+            <th class="holeWidthLarge">
+                Out
+            </th>
+
+            <th class="holeWidthNormal">
+                10
+            </th>
+            <th class="holeWidthNormal">
+                11
+            </th>
+            <th class="holeWidthNormal">
+                12
+            </th>
+            <th class="holeWidthNormal">
+                13
+            </th>
+            <th class="holeWidthNormal">
+                14
+            </th>
+            <th class="holeWidthNormal">
+                15
+            </th>
+            <th class="holeWidthNormal">
+                16
+            </th>
+            <th class="holeWidthNormal">
+                17
+            </th>
+            <th class="holeWidthNormal">
+                18
+            </th>
+
+            <th class="holeWidthLarge">
+                In
+            </th>
+            <th class="holeWidthLarge">
+                Total
+            </th>
+            <th class="holeWidthLarge">
+                Rating
+            </th>
+            <th class="holeWidthLarge">
+                Slope
+            </th>
+        </tr>
+
+        @foreach (var r in Model.TCInfos)
+        {
+            <tr class="r@(r.TColor) r@(r.Theme)viewonly">
+                <td class="holeWidthLargest">
+                    @Html.Label(r.Theme ?? string.Empty)
+                </td>
+                <td class="holeWidthLarge">
+                    @Html.Label(r.Name ?? string.Empty)
+                </td>
+                <td class="holeWidthLarge">
+                    @Html.Label(r.TColor ?? string.Empty)
+                </td>
+                <td class="holeWidthNormal">
+                    @Html.Label(r.H01.ToString())
+                </td>
+                <td class="holeWidthNormal">
+                    @Html.Label(r.H02.ToString())
+                </td>
+                <td class="holeWidthNormal">
+                    @Html.Label(r.H03.ToString())
+                </td>
+                <td class="holeWidthNormal">
+                    @Html.Label(r.H04.ToString())
+                </td>
+                <td class="holeWidthNormal">
+                    @Html.Label(r.H05.ToString())
+                </td>
+                <td class="holeWidthNormal">
+                    @Html.Label(r.H06.ToString())
+                </td>
+                <td class="holeWidthNormal">
+                    @Html.Label(r.H07.ToString())
+                </td>
+                <td class="holeWidthNormal">
+                    @Html.Label(r.H08.ToString())
+                </td>
+                <td class="holeWidthNormal">
+                    @Html.Label(r.H09.ToString())
+                </td>
+                <td class="holeWidthLarge">
+                    @if (r.Theme != "Handicap")
+                    {
+                        @Html.Label(r.HOut.ToString())
+                    }
+                </td>
+
+                <td class="holeWidthNormal">
+                    @Html.Label(r.H10.ToString())
+                </td>
+                <td class="holeWidthNormal">
+                    @Html.Label(r.H11.ToString())
+                </td>
+                <td class="holeWidthNormal">
+                    @Html.Label(r.H12.ToString())
+                </td>
+                <td class="holeWidthNormal">
+                    @Html.Label(r.H13.ToString())
+                </td>
+                <td class="holeWidthNormal">
+                    @Html.Label(r.H14.ToString())
+                </td>
+                <td class="holeWidthNormal">
+                    @Html.Label(r.H15.ToString())
+                </td>
+                <td class="holeWidthNormal">
+                    @Html.Label(r.H16.ToString())
+                </td>
+                <td class="holeWidthNormal">
+                    @Html.Label(r.H17.ToString())
+                </td>
+                <td class="holeWidthNormal">
+                    @Html.Label(r.H18.ToString())
+                </td>
+                <td class="holeWidthLarge">
+                    @if (r.Theme != "Handicap")
+                    {
+                        @Html.Label(r.HIn.ToString())
+                    }
+                </td>
+                <td class="holeWidthLarge">
+                    @if (r.Theme != "Handicap")
+                    {
+                        @Html.Label(r.HTotal.ToString())
+                    }
+                </td>
+                <td class="holeWidthLarge">
+                    @* kpkp: r.Rating never returns 71.4, instead it returns 4. But pure html returns it correctly*@
+                    @*@Html.Label( r.Rating.ToString("n1"), new { @class = r.Theme + "HRating", id = r.Theme + "Test" })*@
+                    @if (r.Theme == "Distance")
+                    {
+                        <label class="' + r.Theme + HRating'" id='" + r.Theme + Test"'>@r.Rating</label>
+                    }
+                </td>
+                <td class="holeWidthLarge">
+                    @if (r.Theme == "Distance")
+                    {
+                        @Html.Label(r.Slope.ToString(), new { @class = r.Theme + "HSlope" })
+                    }
+                </td>
+            </tr>
+        }
+
+    </table>
+    <br/>
+
+</div>
+<p>
+    @if (@User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Edit", "EditCourse", new {id = Model.GCID}) <text>|</text>
+    }
+    @Html.ActionLink("Back to List", "Index")
+</p>

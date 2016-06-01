@@ -1,0 +1,243 @@
+﻿@model GolfWorld1.Models.Course
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit Score Card</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Edit Score Card - ScoreCard Info</h4>
+        <hr />
+        <br />
+        Golf Course : @Html.LabelFor(model => model.Name)<br />
+        Golf Course Name from Model : @Html.Label(Model.Name)<br />
+        <br />
+
+        @if (ViewBag.ExistingRows > 4)
+        {
+            <table class="headerGreenColor1">
+                @* Header *@
+                <tr>
+                    <th>
+                        @Html.LabelFor(model => model.TCInfos[0].Theme, new {@class = "tableHeader widerColumn80"})
+                    </th>
+                    <th>
+                        @Html.LabelFor(model => model.TCInfos[0].Name, new {@class = "tableHeader widerColumn80"})
+                    </th>
+                    <th>
+                        @Html.LabelFor(model => model.TCInfos[0].TColor, new {@class = "tableHeader widerColumn80"})
+                    </th>
+                    <th>
+                        @Html.LabelFor(model => model.TCInfos[0].H01, new {@class = "tableHeader"})
+                    </th>
+                    <th>
+                        @Html.LabelFor(model => model.TCInfos[0].H02, new {@class = "tableHeader"})
+                    </th>
+                    <th>
+                        @Html.LabelFor(model => model.TCInfos[0].H03, new {@class = "tableHeader"})
+                    </th>
+                    <th>
+                        @Html.LabelFor(model => model.TCInfos[0].H04, new {@class = "tableHeader"})
+                    </th>
+                    <th>
+                        @Html.LabelFor(model => model.TCInfos[0].H05, new {@class = "tableHeader"})
+                    </th>
+                    <th>
+                        @Html.LabelFor(model => model.TCInfos[0].H06, new {@class = "tableHeader"})
+                    </th>
+                    <th>
+                        @Html.LabelFor(model => model.TCInfos[0].H07, new {@class = "tableHeader"})
+                    </th>
+                    <th>
+                        @Html.LabelFor(model => model.TCInfos[0].H08, new {@class = "tableHeader"})
+                    </th>
+                    <th>
+                        @Html.LabelFor(model => model.TCInfos[0].H09, new {@class = "tableHeader"})
+                    </th>
+                    <th>
+                        @Html.LabelFor(model => model.TCInfos[0].HOut, new {@class = "tableHeader"})
+                    </th>
+
+                    <th>
+                        @Html.LabelFor(model => model.TCInfos[0].H10, new {@class = "tableHeader widerColumn45"})
+                    </th>
+                    <th>
+                        @Html.LabelFor(model => model.TCInfos[0].H11, new {@class = "tableHeader"})
+                    </th>
+                    <th>
+                        @Html.LabelFor(model => model.TCInfos[0].H12, new {@class = "tableHeader"})
+                    </th>
+                    <th>
+                        @Html.LabelFor(model => model.TCInfos[0].H13, new {@class = "tableHeader"})
+                    </th>
+                    <th>
+                        @Html.LabelFor(model => model.TCInfos[0].H14, new {@class = "tableHeader"})
+                    </th>
+                    <th>
+                        @Html.LabelFor(model => model.TCInfos[0].H15, new {@class = "tableHeader"})
+                    </th>
+                    <th>
+                        @Html.LabelFor(model => model.TCInfos[0].H16, new {@class = "tableHeader"})
+                    </th>
+                    <th>
+                        @Html.LabelFor(model => model.TCInfos[0].H17, new {@class = "tableHeader"})
+                    </th>
+                    <th>
+                        @Html.LabelFor(model => model.TCInfos[0].H18, new {@class = "tableHeader"})
+                    </th>
+
+                    <th>
+                        @Html.LabelFor(model => model.TCInfos[0].HIn, new {@class = "tableHeader widerColumn45"})
+                    </th>
+                    <th>
+                        @Html.LabelFor(model => model.TCInfos[0].HTotal, new {@class = "tableHeader widerColumn45"})
+                    </th>
+
+                    <th>
+                        @Html.LabelFor(model => model.TCInfos[0].Rating, new {@class = "tableHeader widerColumn45"})
+                    </th>
+                    <th>
+                        @Html.LabelFor(model => model.TCInfos[0].Slope, new {@class = "tableHeader widerColumn45"})
+                    </th>
+                </tr>
+
+                @for (int i = 0; i < ViewBag.ExistingRows; i++)
+                {
+                    <tr>
+                        <td>
+                            @Html.TextBoxFor(model => model.TCInfos[i].Theme, new {@class = "tableTextBox widerColumn80", @readonly = "readonly", Style = "background-color:#eeeeee;"})
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.TCInfos[i].Name, new {@class = "tableTextBox widerColumn80"})
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.TCInfos[i].TColor, new {@class = "tableTextBox widerColumn80"})
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.TCInfos[i].H01, new {@class = "tableTextBox"})
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.TCInfos[i].H02, new {@class = "tableTextBox"})
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.TCInfos[i].H03, new {@class = "tableTextBox"})
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.TCInfos[i].H04, new {@class = "tableTextBox"})
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.TCInfos[i].H05, new {@class = "tableTextBox"})
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.TCInfos[i].H06, new {@class = "tableTextBox"})
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.TCInfos[i].H07, new {@class = "tableTextBox"})
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.TCInfos[i].H08, new {@class = "tableTextBox"})
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.TCInfos[i].H09, new {@class = "tableTextBox"})
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.TCInfos[i].HTotal, new {@class = "tableTextBox widerColumn45"})
+                        </td>
+
+                        <td>
+                            @Html.TextBoxFor(model => model.TCInfos[i].H10, new {@class = "tableTextBox"})
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.TCInfos[i].H11, new {@class = "tableTextBox"})
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.TCInfos[i].H12, new {@class = "tableTextBox"})
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.TCInfos[i].H13, new {@class = "tableTextBox"})
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.TCInfos[i].H14, new {@class = "tableTextBox"})
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.TCInfos[i].H15, new {@class = "tableTextBox"})
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.TCInfos[i].H16, new {@class = "tableTextBox"})
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.TCInfos[i].H17, new {@class = "tableTextBox"})
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.TCInfos[i].H18, new {@class = "tableTextBox"})
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.TCInfos[i].HIn, new {@class = "tableTextBox widerColumn45"})
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.TCInfos[i].HTotal, new {@class = "tableTextBox widerColumn45"})
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.TCInfos[i].Rating, new {@class = "tableTextBox widerColumn45"})
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.TCInfos[i].Slope, new {@class = "tableTextBox widerColumn45"})
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        }
+        <br />
+
+        @* Hidden *@
+        <div class="form-group">
+            @Html.EditorFor(model => model.GCID, new {htmlAttributes = new {@class = "hidden"}})
+            @Html.EditorFor(model => model.CreateDate, new {htmlAttributes = new {@class = "hidden"}})
+            @Html.EditorFor(model => model.UpdateDate, new {htmlAttributes = new {@class = "hidden"}})
+            @Html.EditorFor(model => model.Name, new {htmlAttributes = new {@class = "hidden"}})
+            @Html.EditorFor(model => model.SubCourseName, new {htmlAttributes = new {@class = "hidden"}})
+            @Html.EditorFor(model => model.Address, new {htmlAttributes = new {@class = "hidden"}})
+            @Html.EditorFor(model => model.City, new {htmlAttributes = new {@class = "hidden"}})
+            @Html.EditorFor(model => model.State, new {htmlAttributes = new {@class = "hidden"}})
+            @Html.EditorFor(model => model.Zip, new {htmlAttributes = new {@class = "hidden"}})
+            @Html.EditorFor(model => model.Country, new {htmlAttributes = new {@class = "hidden"}})
+            @Html.EditorFor(model => model.NHole, new {htmlAttributes = new {@class = "hidden"}})
+            @Html.EditorFor(model => model.Pars, new {htmlAttributes = new {@class = "hidden"}})
+            @Html.EditorFor(model => model.Tee1, new {htmlAttributes = new {@class = "hidden"}})
+            @Html.EditorFor(model => model.Tee2, new {htmlAttributes = new {@class = "hidden"}})
+            @Html.EditorFor(model => model.Tee3, new {htmlAttributes = new {@class = "hidden"}})
+            @Html.EditorFor(model => model.Tee4, new {htmlAttributes = new {@class = "hidden"}})
+            @Html.EditorFor(model => model.Tee5, new {htmlAttributes = new {@class = "hidden"}})
+            @Html.EditorFor(model => model.Tee6, new {htmlAttributes = new {@class = "hidden"}})
+            @Html.EditorFor(model => model.Tee7, new {htmlAttributes = new {@class = "hidden"}})
+            @Html.EditorFor(model => model.Tee8, new {htmlAttributes = new {@class = "hidden"}})
+            @Html.EditorFor(model => model.Tee9, new {htmlAttributes = new {@class = "hidden"}})
+            @Html.EditorFor(model => model.Phone, new {htmlAttributes = new {@class = "hidden"}})
+            @Html.EditorFor(model => model.URL, new {htmlAttributes = new {@class = "hidden"}})
+        </div>
+
+        @* End of Hidden *@
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <br />
+                <input type="submit" value="Create" class="btn btn-default" style="background-color: #4EE2EC" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
